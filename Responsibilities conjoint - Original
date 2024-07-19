@@ -1,0 +1,80 @@
+//Responsibilities conjoint
+
+Qualtrics.SurveyEngine.addOnload(function()
+{
+	
+ // Set number of choices ;
+ var numChoice=8;
+
+	 // Vectors containing all attribute levels :
+ var showerArray=["30 min", "1 h","1 h 15 min"];
+ var bathchArray=["20 min", "30 min", "50 min"];
+ var mealprepArray=["15 min", "45 min", "1 h"];
+ var cleanArray=["15 min", "25 min", "40 min"];
+ var churchArray=["40 min", "1 h","1 h 15 min"];
+ var chsportArray=["30 min", "50 min", "1 h 15 min"];
+ var exerArray=["20 min", "40 min", "1 h"];
+ var playchArray=["20 min", "35 min", "50 min"];
+ var laundryArray=["30 min", "45 min", "1 h 15 min"];
+ var groceryArray=["20 min", "35 min", "50 min"];
+ var billsArray=["10 min", "20 min", "35 min"];
+ var yardArray=["20 min", "40 min", "1 h 30 min"];
+ var homeworkArray=["15 min", "30 min", "1 h"];
+ var volunteerArray=["20 min", "45 min", "1 h 15 min"];
+ var chdoctorsArray=["30 min", "50 min", "1 h 15 min"];
+
+ // Fisher - Yates shuffle:
+ function shuffle(array){
+	 for (var i=array.length - 1; i > 0; i--)
+   {
+ 				var j = Math.floor(Math.random()*(i + 1));
+ 				var temp=array[i];
+ 				array[i]=array[j];
+ 				array[j]=temp;
+ 		}
+ 	return array;
+ }
+
+ // Shuffle a vector , choose the first entry :
+ function shuffle_one(theArray){
+     var out=shuffle(theArray);
+     var out=out[0];
+     return(out);
+ };
+
+ // Perform the randomization and save the result :
+ for (i = 1; i <= numChoice; i ++) {
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_shower1", shuffle_one(showerArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_shower2", shuffle_one(showerArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_bathc1", shuffle_one(bathchArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_bathc2", shuffle_one(bathchArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_mealp1", shuffle_one(mealprepArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_mealp2", shuffle_one(mealprepArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_clean1", shuffle_one(cleanArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_clean2", shuffle_one(cleanArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_church1", shuffle_one(churchArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_church2", shuffle_one(churchArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_csport1", shuffle_one(chsportArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_csport2", shuffle_one(chsportArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_exer1", shuffle_one(exerArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_exer2", shuffle_one(exerArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_playch1", shuffle_one(playchArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_playch2", shuffle_one(playchArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_laundry1", shuffle_one(laundryArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_laundry2", shuffle_one(laundryArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_grocery1", shuffle_one(groceryArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_grocery2", shuffle_one(groceryArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_bills1", shuffle_one(billsArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_bills2", shuffle_one(billsArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_yard1", shuffle_one(yardArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_yard2", shuffle_one(yardArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_homework1", shuffle_one(homeworkArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_homework2", shuffle_one(homeworkArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_volunteer1", shuffle_one(volunteerArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_volunteer2", shuffle_one(volunteerArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_chdoc1", shuffle_one(chdoctorsArray));
+     	Qualtrics.SurveyEngine.setEmbeddedData("choice"+i+"_chdoc2", shuffle_one(chdoctorsArray));
+ 	}
+
+}
+); 
