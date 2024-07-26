@@ -1,1 +1,156 @@
+// array containing activities
+var activities = [
+    "Working at job for pay",
+    "Showering and getting dressed",
+    "Bathing and dressing children",
+    "Preparing meals for self and family",
+    "Cleaning inside the house",
+    "Attending religious services",
+    "Attending child’s sporting event",
+    "Exercising",
+    "Playing with children",
+    "Doing laundry",
+    "Grocery shopping",
+    "Paying household bills",
+    "Doing yardwork",
+    "Helping children with homework",
+    "Volunteering (for example, at a soup kitchen)",
+    "Taking child to a doctor’s appointment"
+];
 
+// Define an object mapping activity names to their time levels
+
+var workingAtJobForPay = ["6 h", "8 h", "10 h"];
+var showeringAndGettingDressed = ["30 min", "1 h", "1 h 15 min"];
+var bathingAndDressingChildren = ["20 min", "30 min", "50 min"];
+var preparingMealsForSelfAndFamily = ["15 min", "45 min", "1 h"];
+var cleaningInsideTheHouse = ["15 min", "25 min", "40 min"];
+var attendingReligiousServices = ["40 min", "1 h", "1 h 15 min"];
+var attendingChildsSportingEvent = ["30 min", "50 min", "1 h 15 min"];
+var exercising = ["20 min", "40 min", "1 h"];
+var playingWithChildren = ["20 min", "35 min", "50 min"];
+var doingLaundry = ["30 min", "45 min", "1 h 15 min"];
+var groceryShopping = ["20 min", "35 min", "50 min"];
+var payingHouseholdBills = ["10 min", "20 min", "35 min"];
+var doingYardwork = ["20 min", "40 min", "1 h 30 min"];
+var helpingChildrenWithHomework = ["15 min", "30 min", "1 h"];
+var volunteering = ["20 min", "45 min", "1 h 15 min"];
+var takingChildToDoctorsAppointment = ["30 min", "50 min", "1 h 15 min"];
+
+var activitiesMap = {
+    "Working at job for pay": workingAtJobForPay,
+    "Showering and getting dressed": showeringAndGettingDressed,
+    "Bathing and dressing children": bathingAndDressingChildren,
+    "Preparing meals for self and family": preparingMealsForSelfAndFamily,
+    "Cleaning inside the house": cleaningInsideTheHouse,
+    "Attending religious services": attendingReligiousServices,
+    "Attending child’s sporting event": attendingChildsSportingEvent,
+    "Exercising": exercising,
+    "Playing with children": playingWithChildren,
+    "Doing laundry": doingLaundry,
+    "Grocery shopping": groceryShopping,
+    "Paying household bills": payingHouseholdBills,
+    "Doing yardwork": doingYardwork,
+    "Helping children with homework": helpingChildrenWithHomework,
+    "Volunteering (for example, at a soup kitchen)": volunteering,
+    "Taking child to a doctor’s appointment": takingChildToDoctorsAppointment
+};
+
+// Function to get time levels for an activity
+function getTimeLevels(activity) {
+    //this is a standard way of either getting the desired outcome or an empty array, so that we don't get messy errors in case the activity doesnt exist
+    return activitiesMap[activity] || [];
+}
+
+
+//fisher-yates shuffle
+function shuffle(array){
+    for(var i = array.length-1;i>0;i--){
+      var j = Math.floor(Math.random()*(i+1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
+}
+
+//shuffle one and return the first item in the array
+function shuffle_one(theArray){
+  var out = shuffle(theArray);
+  var out1 = out[0];
+  return(out1);
+}
+
+/// Function to get random unique activities and their random time levels
+// function getRandomActivitiesWithTimeLevels(numActivities) {
+
+//     // An empty array to store selected activities and times
+//     var selectedActivities = [];
+//     // Get all activity names as an array
+//     var activityNames = Object.keys(activitiesMap);
+//     // Loop until we have enough activities
+//     while (selectedActivities.length < numActivities) {
+//         // Pick a random activity
+//         var randomActivity = shuffle_one(activities);
+//         // Check if the activity has already been selected, .includes checks if the activity we pass is in it,
+//         if (!selectedActivities.includes(randomActivity)) {
+//             // Pick a random time for the activity
+//             var randomTimeLevel1 = shuffle_one(activitiesMap[randomActivity]);
+//             var randomTimeLevel2 = shuffle_one(activitiesMap[randomActivity]);
+//             //add the activity and time to the list
+//             selectedActivities.push({ activity: randomActivity, timeLevel1: randomTimeLevel1, timeLevel2: randomTimeLevel2 });
+        
+
+//         }
+//     }
+
+//     return selectedActivities;
+// }
+function getRandomActivitiesWithTimeLevels(numActivities) {
+    // An empty array to store selected activities and times
+    var selectedActivities = [];
+
+    // Get all activity names as an array
+    var activityNames = Object.keys(activitiesMap);
+
+    // Ensure we have enough activities to choose from
+    if (numActivities > activityNames.length) {
+        throw new Error("Not enough unique activities to select from.");
+    }
+
+    // Loop until we have enough activities
+    while (selectedActivities.length < numActivities) {
+        // Pick a random activity
+        var randomActivity = shuffle_one(activityNames);
+
+        // Check if the activity has already been selected
+        if (!selectedActivities.some(activity => activity.activity === randomActivity)) {
+            // Pick a random time for the activity
+            var randomTimeLevel1 = shuffle_one(activitiesMap[randomActivity]);
+            var randomTimeLevel2 = shuffle_one(activitiesMap[randomActivity]);
+            // Add the activity and time to the list
+            selectedActivities.push({ activity: randomActivity, timeLevel1: randomTimeLevel1, timeLevel2: randomTimeLevel2 });
+        }
+    }
+
+    return selectedActivities;
+}
+
+// Usage example
+var activityName = "Working at job for pay";
+var timeLevels = getTimeLevels(activityName);
+
+// number of activities per run you want to see
+var numActivities = 6;
+var runs = 8;
+for(var i=0;i<runs;i++){
+
+// create an array with the amount of activities you want per run, getRandomActivity returns an array full of randomized activities
+var selectedActivitiesWithTimeLevels = getRandomActivitiesWithTimeLevels(numActivities);
+
+//with this one we run the whole set of 6 a couple of times.
+    selectedActivitiesWithTimeLevels.forEach(function(item) {
+     
+        console.log("Activity:", item.activity, "| Option 1: ", item.timeLevel1, "| Option 2: ", item.timeLevel2);
+    });
+    console.log(" ");
