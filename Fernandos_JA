@@ -153,4 +153,5 @@ var selectedActivitiesWithTimeLevels = getRandomActivitiesWithTimeLevels(numActi
      
         console.log("Activity:", item.activity, "| Option 1: ", item.timeLevel1, "| Option 2: ", item.timeLevel2);
     });
+}
     console.log(" ");
