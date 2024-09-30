@@ -1,6 +1,9 @@
+//Responsibilities conjoint
+
+Qualtrics.SurveyEngine.addOnload(function()
+{
 // array containing activities
 var activities = [
-    "Working at job for pay",
     "Showering and getting dressed",
     "Bathing and dressing children",
     "Preparing meals for self and family",
@@ -19,7 +22,6 @@ var activities = [
 ];
 // Define an object mapping activity names to their time levels
 
-var workingAtJobForPay = ["6 h", "8 h", "10 h"];
 var showeringAndGettingDressed = ["30 min", "1 h", "1 h 15 min"];
 var bathingAndDressingChildren = ["20 min", "30 min", "50 min"];
 var preparingMealsForSelfAndFamily = ["15 min", "45 min", "1 h"];
@@ -37,7 +39,6 @@ var volunteering = ["20 min", "45 min", "1 h 15 min"];
 var takingChildToDoctorsAppointment = ["30 min", "50 min", "1 h 15 min"];
 
 var activitiesMap = {
-    "Working at job for pay": workingAtJobForPay,
     "Showering and getting dressed": showeringAndGettingDressed,
     "Bathing and dressing children": bathingAndDressingChildren,
     "Preparing meals for self and family": preparingMealsForSelfAndFamily,
@@ -112,7 +113,7 @@ function getRandomActivitiesWithTimeLevels(numActivities) {
 }
 
 // Usage example
-var activityName = "Working at job for pay";
+var activityName = "Doing yardwork";
 var timeLevels = getTimeLevels(activityName);
 
 // number of activities per run you want to see
@@ -133,11 +134,12 @@ var selectedActivitiesWithTimeLevels = getRandomActivitiesWithTimeLevels(numActi
         // i++;
 
        // console.log("run"+i+"_activity"+a, item.activity, "run"+i+"_acti"+a+"_Level"+b, item.timeLevel1, "run"+i+"_acti"+a+"_Level"+(++b), item.timeLevel2);
-Qualtrics.SuveyEnginee.setEmbeddedData("run"+i+"_activity"+a, item.activity, "run"+i+"_acti"+a+"_Level"+b, item.timeLevel1, "run"+i+"_acti"+a+"_Level"+(++b), item.timeLevel2)
-        a++;
+Qualtrics.SurveyEngine.setEmbeddedData("run"+i+"_activity"+a, item.activity)
+       Qualtrics.SurveyEngine.setEmbeddedData("run"+i+"_acti"+a+"_Level"+b, item.timeLevel1)
+		Qualtrics.SurveyEngine.setEmbeddedData( "run"+i+"_acti"+a+"_Level"+(++b), item.timeLevel2)
+		a++;
         b=1;
 
-    });
-   // console.log(" ");
-
-}
+    	});
+	}
+});
